@@ -24,3 +24,40 @@ model User {
   firstName String?
   lastName  String?
 }
+
+model People {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name            String?
+  lastContactDate DateTime?
+  birthday        DateTime?
+  photoUrl        String?
+  associations    Associations[]
+  notes           Notes[]
+  status          Status?        @relation(fields: [statusId], references: [id])
+  statusId        Int?           @unique
+}
+
+model Associations {
+  id       Int     @id @default(autoincrement())
+  name     String
+  People   People? @relation(fields: [peopleId], references: [id])
+  peopleId Int?
+}
+
+model Notes {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  content     String? @db.Text
+  People      People? @relation(fields: [peopleId], references: [id])
+  peopleId    Int?
+}
+
+model Status {
+  id     Int     @id @default(autoincrement())
+  name   String
+  People People?
+}
