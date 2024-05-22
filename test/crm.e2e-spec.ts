@@ -36,12 +36,15 @@ describe('App e2e', () => {
   describe('crm', () => {
     const dto: PersonDto = {
       name: 'Faruk NEBOVIC',
-      // associations: [{ name: 'test' }],
-      // notes: [{ title: 'title' }],
+      associations: [{ name: 'test' }],
+      notes: [{ title: 'title' }],
     };
-    describe('Create person', () => {
+    describe('person', () => {
       it('should create person', () => {
         return pactum.spec().post('/crm').withBody(dto).expectStatus(201);
+      });
+      it('should get person', () => {
+        return pactum.spec().get('/crm').expectStatus(200);
       });
     });
   });

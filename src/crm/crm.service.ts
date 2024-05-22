@@ -15,6 +15,16 @@ export class CrmService {
     });
   }
 
+  async getPerson() {
+    return this.prisma.people.findMany({
+      include: {
+        associations: true,
+        notes: true,
+        status: true,
+      },
+    });
+  }
+
   formatPersonBody({
     name,
     lastContactDate,

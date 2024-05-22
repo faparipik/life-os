@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get } from '@nestjs/common';
 import { CrmService } from './crm.service';
 import { PersonDto } from './dto';
 
@@ -9,5 +9,10 @@ export class CrmController {
   @Post()
   addNewPerson(@Body() body: PersonDto) {
     return this.crmService.addNewPerson(body);
+  }
+
+  @Get()
+  getPerson() {
+    return this.crmService.getPerson();
   }
 }
